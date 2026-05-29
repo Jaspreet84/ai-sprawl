@@ -1,9 +1,11 @@
 import { createServer } from "node:http";
 import { URL } from "node:url";
 
+import { buildDashboardData } from "./dashboard/data.js";
+import { renderDashboardPage } from "./dashboard/page.js";
 import { scorePullRequest } from "./risk/score.js";
 import { buildInstallUrl, summarizeGithubAppConfig, verifyGithubWebhook } from "./github/app.js";
-import { readJsonBody, sendJson, sendText } from "./util/http.js";
+import { readJsonBody, sendHtml, sendJson, sendText } from "./util/http.js";
 
 const port = Number(process.env.PORT || 3000);
 
@@ -11,22 +13,8 @@ const server = createServer(async (req, res) => {
   const requestUrl = new URL(req.url || "/", `http://${req.headers.host || "localhost"}`);
   const { pathname } = requestUrl;
 
-  if (req.method === "GET" && pathname === "/") {
-    return sendText(
-      res,
-      [
-        "ai-sprawl",
-        "",
-        "AI Code Governance starter service.",
-        "",
-        "Routes:",
-        "GET /health",
-        "GET /github/install",
-        "GET /github/config",
-        "POST /api/risk/score",
-        "POST /webhooks/github",
-      ].join("\n")
-    );
+  if (req.method === "GET" && (pathname === "/" || pathname === "/dashboard")) {
+    return sendHtml(res, renderDashboardPage(buildDashboardData()));
   }
 
   if (req.method === "GET" && pathname === "/health") {
@@ -46,6 +34,10 @@ const server = createServer(async (req, res) => {
 
   if (req.method === "GET" && pathname === "/github/config") {
     return sendJson(res, summarizeGithubAppConfig());
+  }
+
+  if (req.method === "GET" && pathname === "/api/dashboard") {
+    return sendJson(res, buildDashboardData());
   }
 
   if (req.method === "POST" && pathname === "/api/risk/score") {

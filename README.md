@@ -54,9 +54,12 @@ npm start
 
 Available routes:
 
+- `GET /` - dashboard homepage
+- `GET /dashboard` - dashboard homepage
 - `GET /health`
 - `GET /github/install`
 - `GET /github/config`
+- `GET /api/dashboard`
 - `POST /api/risk/score`
 - `POST /webhooks/github`
 

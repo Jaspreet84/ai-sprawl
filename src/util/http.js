@@ -26,6 +26,11 @@ export function sendJson(res, body, statusCode = 200) {
   res.end(JSON.stringify(body, null, 2));
 }
 
+export function sendHtml(res, body, statusCode = 200) {
+  res.writeHead(statusCode, { "content-type": "text/html; charset=utf-8" });
+  res.end(body);
+}
+
 export function sendText(res, body, statusCode = 200) {
   res.writeHead(statusCode, { "content-type": "text/plain; charset=utf-8" });
   res.end(body);
