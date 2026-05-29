@@ -41,8 +41,30 @@ AI coding tools are no longer experimental. The bottleneck has shifted from prod
 - `docs/problem.md` - the core problem statement
 - `docs/mvp.md` - the first product wedge
 - `docs/roadmap.md` - the build plan
-- `src/index.js` - a tiny runnable scoring demo
+- `src/index.js` - server entry point
+- `src/server.js` - HTTP API and GitHub App scaffold
+- `src/github/app.js` - install URL and webhook helpers
 - `src/risk/score.js` - the first risk-scoring stub
+
+## Running
+
+```bash
+npm start
+```
+
+Available routes:
+
+- `GET /health`
+- `GET /github/install`
+- `GET /github/config`
+- `POST /api/risk/score`
+- `POST /webhooks/github`
+
+## Environment
+
+- `PORT` - server port, defaults to `3000`
+- `GITHUB_APP_SLUG` - GitHub App slug used for the install URL, defaults to `ai-sprawl`
+- `GITHUB_APP_WEBHOOK_SECRET` - optional webhook signature secret
 
 ## Status
 
