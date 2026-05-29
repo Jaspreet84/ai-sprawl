@@ -36,6 +36,14 @@ A GitHub app that flags risky changes in pull requests and forces lightweight go
 
 AI coding tools are no longer experimental. The bottleneck has shifted from producing code to controlling what that code turns into.
 
+## Repo layout
+
+- `docs/problem.md` - the core problem statement
+- `docs/mvp.md` - the first product wedge
+- `docs/roadmap.md` - the build plan
+- `src/index.js` - a tiny runnable scoring demo
+- `src/risk/score.js` - the first risk-scoring stub
+
 ## Status
 
 This repo is the home for the project definition, product thinking, and first implementation work.

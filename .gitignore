@@ -8,3 +8,4 @@ USER.md
 avatars/
 memory/
 .DS_Store
+node_modules/
